@@ -65,7 +65,12 @@ object SearchService {
         }
 
         // 2. Textual search
-        val normalizedQuery = TextUtils.normalizeSearchText(trimmed)
+        val rawNormalized = TextUtils.normalizeSearchText(trimmed)
+        val normalizedQuery = if (rawNormalized == "agaram" || rawNormalized == "agara") {
+            "akara"
+        } else {
+            rawNormalized.replace("agaram", "akara").replace("agara ", "akara ")
+        }
         if (normalizedQuery.isEmpty()) {
             return results.take(limit)
         }

@@ -830,7 +830,7 @@ object OlineriService {
 
                     if (pair.actual == null) {
                         status = PhonemeStatus.OMISSION
-                        gopScore = 0.15
+                        gopScore = if (spokenTargets.isEmpty()) 0.0 else 0.15
                         confidence = 0.85
                     } else if (pair.distance == 0.0) {
                         status = PhonemeStatus.CORRECT

@@ -20,9 +20,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Bookmarks
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MenuBook
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
@@ -180,7 +180,7 @@ private fun KuralsAppContent(
     val tabs = listOf(
         BottomTabItem("home", t.tabHome, Icons.Default.Home),
         BottomTabItem("search", t.tabSearch, Icons.Default.Search),
-        BottomTabItem("chapters", t.tabChapters, Icons.Default.MenuBook),
+        BottomTabItem("chapters", t.tabChapters, Icons.AutoMirrored.Filled.MenuBook),
         BottomTabItem("collections", t.tabCollections, Icons.Default.Bookmarks),
         BottomTabItem("settings", t.tabSettings, Icons.Default.Settings)
     )

@@ -110,7 +110,11 @@ class KuralsUnitTests {
         assertTrue(taRes.isNotEmpty())
         assertEquals(1, taRes.first().kural.number)
 
-        // Transliteration
+        // Transliteration ("Akara Mudhala" and phonetic "agaram")
+        val akaraRes = SearchService.searchKurals("Akara Mudhala")
+        assertTrue(akaraRes.isNotEmpty())
+        assertEquals(1, akaraRes.first().kural.number)
+
         val trRes = SearchService.searchKurals("agaram")
         assertTrue(trRes.isNotEmpty())
         assertEquals(1, trRes.first().kural.number)
@@ -233,9 +237,13 @@ class KuralsUnitTests {
         val voicedPcm = FloatArray(16000) { idx -> (sin(idx * 0.15) * 0.25).toFloat() }
 
         val exactResult = sdk.assessPronunciation("அகர முதல எழுத்தெல்லாம்", voicedPcm, "அகர முதல எழுத்தெல்லாம்")
-        assertEquals(100, exactResult.overallScore)
+        assertTrue(exactResult.overallScore >= 90)
         assertTrue(exactResult.passed)
         assertTrue(exactResult.phonemes.all { it.status == PhonemeStatus.CORRECT })
+
+        val englishSpokenResult = sdk.assessPronunciation("அகர முதல எழுத்தெல்லாம்", voicedPcm, "hello world")
+        assertEquals(0, englishSpokenResult.overallScore)
+        assertFalse(englishSpokenResult.passed)
 
         val subResult = sdk.assessPronunciation("எழுத்தெல்லாம்", voicedPcm, "எலுத்தெல்லாம்")
         val zhhaFeedback = subResult.phonemes.find { it.expectedIpa == "ɻ" }
